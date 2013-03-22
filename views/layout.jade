@@ -1,6 +1,7 @@
-!!!
+!!! 5
+html(lang='en')
   head
-    title= opts.title
+    title= title
 
     meta(
       name='description'
@@ -43,8 +44,7 @@
     script
       document.write('<link rel="stylesheet" href="/styles/print/' + (window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 
-    //
-      if lt IE 9
+    //if lt IE 9
       <script src="lib/js/html5shiv.js"></script>
 
   body
@@ -55,6 +55,3 @@
     script(src='/lib/js/head.min.js')
     script(src='/javascripts/reveal.min.js')
     script(src='/javascripts/reveal-init.js')
-
-  </body>
-</html>

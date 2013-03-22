@@ -1,7 +1,7 @@
 (function() {
   var express = require('express')
     , http = require('http')
-    , less = require('less-middleware')
+    // , less = require('less-middleware')
     , app = express()
     , staticApp = express['static'];
 
@@ -16,11 +16,10 @@
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
-    app.use(less({
-      src: __dirname + "/public",
-      compress: true
-    }));
-    app.use(express.staticCache());
+    // app.use(less({
+    //   src: __dirname + "/public",
+    //   compress: true
+    // }));
     app.use(staticApp(__dirname + "/public"));
 
     app.use(function(req, res) {
@@ -41,15 +40,14 @@
 
   // Begin Routes
   app.get('/', function(req, res) {
-    var opts = {
-      title: 'RevealJS'
-      , file: 'index'
-    };
+    var opts = { title: 'RevealJS', file: 'index' };
     return res.render('index', opts);
   });
 
-  app.get('/less-options', function(req, res) {
-    return res.json(lessOpts);
+  app.get('/js-training', function(req, res) {
+    var file= 'js-training';
+    var opts = { title: 'JavaScript Training', file: file };
+    return res.render(file, opts);
   });
 
   // Init
@@ -57,6 +55,6 @@
   http
     .createServer(app)
     .listen(port, function() {
-      return console.log("Server started on port " + port + " in ");
+      return console.log("Server started on port " + port);
   });
 }).call(this);
