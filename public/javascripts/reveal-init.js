@@ -18,11 +18,9 @@ Reveal.initialize({
       // Allow manual setting of languages in hljs fenced blocks
       [].slice.call( document.querySelectorAll( 'pre code' ) ).forEach( function( element ) {
           var lang = element.className.match(/lang\-(\w+)/);
+
           if (lang && lang.length > 1) {
-            lang = lang[1];
-            var html = element.innerHTML;
-            var highlighted = hljs.highlight(lang, html);
-            element.innerHTML = highlighted.value;
+            element.innerHTML = hljs.highlight(lang[1], element.innerHTML).value;
           } else {
             hljs.highlightBlock( element );
           }
