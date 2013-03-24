@@ -73,7 +73,7 @@ block slides
         - Makes particular sense for nested Objects (`object.nestedObj.nestedObjLvl2`)
 
         ```javascript
-        employees.James; // => "CEO"
+        employees.James; // "CEO"
         ```
 
     section
@@ -85,10 +85,10 @@ block slides
         ```javascript
         // Variable access
         var name = "Amber";
-        employees[name]; // => "VP Marketing"
+        employees[name]; // "VP Marketing"
 
         // Key has spaces / period, etc.
-        employees["Bartholemew H."]; // => "Engineer"
+        employees["Bartholemew H."]; // "Engineer"
 
         // Reserved word
         myOtherObj["this"]
@@ -117,7 +117,7 @@ block slides
 
         ```javascript
         // Get an array of all the names
-        _.pluck(employees, 'name'); // => ["James", "Amber", "Bartholemew H."]
+        _.pluck(employees, 'name'); // ["James", "Amber", "Bartholemew H."]
 
         // Filter only non-executives
         _.filter(employees, function(employee){
@@ -140,12 +140,12 @@ block slides
         Some examples of the horror:
 
         ```javascript
-        false == 0; // => true
-        false == "0000"; => true
-        null == undefined; // => true
-        true == 1; // => true
-        true == "1"; // => true
-        NaN == NaN; // => false WTF!?
+        false == 0; // true
+        false == "0000"; // true
+        null == undefined; // true
+        true == 1; // true
+        true == "1"; // true
+        NaN == NaN; // false WTF!?
         ```
 
     section
@@ -154,28 +154,40 @@ block slides
         #### "==="
 
         ```javascript
-        false === 0; // => false
-        false === "0000"; => false
-        null === undefined; // => false
-        true === 1; // => false
-        true === "1"; // => false
-        NaN === NaN; // => false WTF!?
+        false === 0; // false
+        false === "0000"; // false
+        null === undefined; // false
+        true === 1; // false
+        true === "1"; // false
+        NaN === NaN; // false WTF!?
         ```
 
         Okay, Almost everything
         ```javascript
-        isNaN(NaN); // => true (whew)
+        isNaN(NaN); // true (whew)
         ```
 
     section
       :markdown
         ### "Truthy" & "Falsey" values
-        All values that evaluate to `==` `true` or `if(value) { // passed check }` are considered "Truthy". "Falsey" values are the reverse of this.
+        All values that evaluate to
+        ```javascript
+        value == false; // true
+        ```
+        or typecast to `boolean` value of `false`
+        ```javascript
+        !!null // false
+        !!undefined // false
+        !!0 // false
+        !!"" // false
+        ```
+        are considered "Falsey". All other values are "Truthy".
 
     section
       :markdown
         Examples of "Falsey" values:
 
+          - `false` (suprisingly!)
           - `null`
           - `undefined`
           - `0`
