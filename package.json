@@ -4,14 +4,13 @@
   "private": true,
   "author": "Brian Frichette",
   "bugs": { "url": "https://github.com/brian-frichette/reveal-express/issues" },
-  "scripts": {
-    "start": "nodemon app.js"
-  },
+  "scripts": { "start": "nodemon app.js" },
   "dependencies": {
     "express": ">=3.0",
     "jade": "*",
     "less-middleware": "*",
-    "lodash": "1.0.x"
+    "lodash": "1.0.x",
+    "marked": "*"
   },
   "devDependencies": {
     "grunt": "0.4.x",

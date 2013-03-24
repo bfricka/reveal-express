@@ -6,7 +6,6 @@
     , staticApp = express['static'];
 
   // Begin config
-
   app.configure(function() {
     app.set('port', 3000);
     app.set('views', "" + __dirname + "/views");
@@ -47,6 +46,7 @@
   app.get('/js-training', function(req, res) {
     var file= 'js-training';
     var opts = { title: 'JavaScript Training', file: file };
+
     return res.render(file, opts);
   });
 

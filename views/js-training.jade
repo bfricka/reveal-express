@@ -15,15 +15,213 @@ block slides
   section
     :markdown
       ## Types:
-
-    ul
-      li.fragment(data-fragment-id='1') String
-      li.fragment(data-fragment-id='2') Number
-      li.fragment(data-fragment-id='3') Array
-      li.fragment(data-fragment-id='4') Function
-      li.fragment(data-fragment-id='5') Object
+      - String
+      - Number
+      - Array
+      - Function
+      - Object
 
   section
-    h2 Objects
-    li.fragment(data-fragment-id='1') aka. HashSet (Java), Dictionary <string, object> (.NET)
-    li.fragment(data-fragment-id='2') Dot notation vs bracket notation
+    //- Object slides
+    section
+      :markdown
+        ## `Object`
+        - Aka. HashMap (Java)
+        - Dictionary `<string, object>` (.NET)
+        - Dictionary (Python)
+        - Hash (Ruby)
+        - Associative Array (PHP)
+        - etc...
+
+    section
+      :markdown
+        ## `Object` Syntax
+
+        ### Creation
+
+        ```javascript
+        // Object literal
+        var myObj = {};
+
+        // Constructor (rarely used)
+        var myObj = new Object();
+        ```
+
+        ### Creation with properties
+        ```javascript
+        var employees = {
+          James: "CEO"
+          , Amber: "VP Marketing"
+          , "Bartholemew": "Engineer"
+        };
+        ```
+
+    section
+      :markdown
+        ### Accessing properties
+        ```javascript
+        var employees = {
+          James: "CEO"
+          , Amber: "VP Marketing"
+          , "Bartholemew H.": "Engineer"
+        };
+        ```
+
+
+        ### Object Dot Notation
+        - Most commonly used
+        - Makes particular sense for nested Objects (`object.nestedObj.nestedObjLvl2`)
+
+        ```javascript
+        employees.James; // => "CEO"
+        ```
+
+    section
+      :markdown
+        ### Object Bracket Notation
+        - Used when dot notation is not syntatically possible (Reserved words, spaces, etc.)
+        - Used to access variable keys
+
+        ```javascript
+        // Variable access
+        var name = "Amber";
+        employees[name]; // => "VP Marketing"
+
+        // Key has spaces / period, etc.
+        employees["Bartholemew H."]; // => "Engineer"
+
+        // Reserved word
+        myOtherObj["this"]
+        ```
+
+  section
+    //- Side note: Array of Objects as Models
+    section
+      :markdown
+        ## Objects as Models (side note)
+        The most common way to represent a model in JS MVC Frameworks
+        is with an Array of Objects or sometimes a plain object map.
+
+        ```javascript
+        var employees = [
+          { name: "James", title: "CEO", executive: true }
+          , { name: "Amber", title: "VP Marketing", executive: true }
+          , { name: "Bartholemew H.", title: "Engineer", executive: false }
+        ];
+        ```
+
+    section
+      :markdown
+        ### Examples of dealing with models:
+        #### (Using Underscore.js library)
+
+        ```javascript
+        // Get an array of all the names
+        _.pluck(employees, 'name'); // => ["James", "Amber", "Bartholemew H."]
+
+        // Filter only non-executives
+        _.filter(employees, function(employee){
+          return !employee.executive;
+        }); // [ { name: "Bartholemew H.", title: "Engineer", executive: false }]
+
+        // Group By "Executive" status
+        _.groupBy(employees, 'executive');
+        // { true: Array[2], false: Array[1] }
+        ```
+
+  section
+    //- Boolean operations
+    section
+      :markdown
+        ## Boolean Operations (Oh crap it's JS!)
+
+        Unfortunately, JavaScript boolean operations leave much to be desired.
+
+        Some examples of the horror:
+
+        ```javascript
+        false == 0; // => true
+        false == "0000"; => true
+        null == undefined; // => true
+        true == 1; // => true
+        true == "1"; // => true
+        NaN == NaN; // => false WTF!?
+        ```
+
+    section
+      :markdown
+        ### How do we fix this!?
+        #### "==="
+
+        ```javascript
+        false === 0; // => false
+        false === "0000"; => false
+        null === undefined; // => false
+        true === 1; // => false
+        true === "1"; // => false
+        NaN === NaN; // => false WTF!?
+        ```
+
+        Okay, Almost everything
+        ```javascript
+        isNaN(NaN); // => true (whew)
+        ```
+
+    section
+      :markdown
+        ### "Truthy" & "Falsey" values
+        All values that evaluate to `==` `true` or `if(value) { // passed check }` are considered "Truthy". "Falsey" values are the reverse of this.
+
+    section
+      :markdown
+        Examples of "Falsey" values:
+
+          - `null`
+          - `undefined`
+          - `0`
+          - `""`
+
+        Examples of "Truthy" values: (Ummm, anything not falsey?)
+
+    section
+      :markdown
+        ### Conventions for equivelancy checking
+        ```javascript
+        // Truthy
+        if (value) {
+          // Value IS NOT 0 OR "" OR undefined OR null OR false
+        }
+
+        // Falsey
+        if (!value) {
+          // Value IS 0 OR "" OR undefined OR null OR false
+        }
+
+        // Existential
+        if (value == null) {
+          // True if value is null or undefined (aka, does not exist)
+        }
+        ```
+
+    section
+      :markdown
+        ### Examples of equivelancy checking
+        "Truthy" / "Falsey" checking
+        ```javascript
+        var emptyArray = [];
+        if (emptyArray) {
+          // True. The array exists.
+        }
+
+        if (!emptyArray.length) {
+          // True. The array length is 0 and is falsey.
+        }
+        ```
+
+        Existential checking
+        ```javascript
+        var emptyString = "";
+        if (emptyString != null) {
+          console.log("Exists"); // Exists
+        }
+        ```
