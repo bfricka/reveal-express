@@ -42,6 +42,14 @@ html(lang='en')
 
     //- If the query includes 'print-pdf', use the PDF print sheet
     script
+      Element.prototype.hasClass = function(name) {
+        var classNames = this.className.split(/[\s\n]+/);
+        for (var i = 0, len = classNames.length; i < len; i++) {
+          if (classNames[i] === name) return true;
+        }
+
+        return false;
+      };
       document.write('<link rel="stylesheet" href="/styles/print/' + (window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 
     //if lt IE 9
