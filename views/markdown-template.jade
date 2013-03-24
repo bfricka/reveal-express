@@ -1,0 +1,8 @@
+extends layout
+
+block slides
+  section(
+    data-markdown='/markdown/#{file}.md'
+    data-separator='^\n\n\n'
+    data-vertical='^\n\n'
+  )

@@ -43,6 +43,12 @@
     return res.render('index', opts);
   });
 
+  app.get('/md/:file', function(req, res){
+    var title = req.query.title ? req.query.title : "Presentation";
+    var opts = {title: title, file: req.params.file };
+    res.render('markdown-template', opts);
+  });
+
   app.get('/js-training', function(req, res) {
     var file= 'js-training';
     var opts = { title: 'JavaScript Training', file: file };
